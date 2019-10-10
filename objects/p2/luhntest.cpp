@@ -16,6 +16,7 @@ This file test luhn object
 All includes here
 -----------------------------------------------------------------*/
 #include "luhn.h"
+#include "../util/util.h"
 
 /*----------------------------------------------------------------
 https://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm

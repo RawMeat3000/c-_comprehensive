@@ -18,12 +18,18 @@
     <ClInclude Include="..\objects\util\util.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="luhn.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="reverse.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="reversetest.cpp">
+    <ClCompile Include="luhntest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="luhn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="reverse.cpp">

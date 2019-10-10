@@ -116,11 +116,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\objects\util\util.h" />
+    <ClInclude Include="luhn.h" />
     <ClInclude Include="reverse.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="luhn.cpp" />
+    <ClCompile Include="luhntest.cpp" />
     <ClCompile Include="reverse.cpp" />
-    <ClCompile Include="reversetest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
