@@ -3,11 +3,11 @@
 
 bool luhn::check(unsigned long long card_number)
 {
+	const long long saved_card_number = card_number;
 	unsigned long long mod = 10;
 	int total = 0;
 	int current_num = 0;
 	int card_digits = floor(log10(card_number)) + 1;
-	cout << card_number << endl;
 	for ( int i = 1; i <= card_digits; i++ )
 	{
 		mod = pow(10, (card_digits - i));
@@ -25,13 +25,18 @@ bool luhn::check(unsigned long long card_number)
 			current_num = card_number / mod;
 		}
 		total += current_num;
-		cout << "Current total " << total << endl;
 		card_number = card_number % mod;
 	}
-	cout << "TOTAL IS " << total << endl;
 	
-	if ( total % 10 == 0 )
+	if ( total % 10 == 0 && card_digits == 16 )
+	{
+		cout << "Card number is: " << saved_card_number << " \n\tcard digits: " << card_digits << " \n\tSum " << total << " \n\tVALID" << endl;
 		return true;
+	}
 	else
+	{
+		cout << "Card number is: " << saved_card_number << " \n\tcard digits: " << card_digits << " \n\tSum " << total << " \n\tINVALID" << endl;
 		return false;
+	}
+
 }
