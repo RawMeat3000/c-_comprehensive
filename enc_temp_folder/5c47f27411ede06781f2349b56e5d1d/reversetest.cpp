@@ -58,25 +58,3 @@ int main() {
 }
 
 //EOF
-
-/*
-sizeof(unsigned long) = 4
-n =          0 a =          0 Expected =          0
-n =          1 a =          1 Expected =          1
-n =         10 a =          1 Expected =          1
-n =          9 a =          9 Expected =          9
-n =       1000 a =          1 Expected =          1
-n = 4294967294 a =          0 Expected =          0
-n = 4294967295 a =          0 Expected =          0
-n = 4294967293 a = 3927694924 Expected = 3927694924
-n =  176160752 a =  257061671 Expected =  257061671
-n =    1234567 a =    7654321 Expected =    7654321
-n =     765432 a =     234567 Expected =     234567
-1000000001
-1000000002
-1000000003
-1000000004
-1000000005
-The first long number for which reverse fails = 1000000005
-All reverse tests passed. You are amazing
-*/
