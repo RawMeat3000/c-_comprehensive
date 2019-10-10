@@ -26,7 +26,6 @@ bool luhn::check(unsigned long long card_number)
 			current_num = card_number / mod;
 		}
 		total += current_num;
-		cout << "Current total ", total << endl;
 		card_number = card_number % mod;
 	}
 	cout << "TOTAL IS " << total << endl;
