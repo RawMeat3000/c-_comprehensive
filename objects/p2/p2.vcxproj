@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{5E7DF41D-89FE-49CD-B9C5-B4C321B00A78}</ProjectGuid>
-    <RootNamespace>ccomprehensive</RootNamespace>
+    <ProjectGuid>{1E03E05F-DC11-4183-8A33-2BC02ABBCA49}</ProjectGuid>
+    <RootNamespace>p2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -115,6 +115,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\objects\util\util.h" />
+    <ClInclude Include="reverse.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="reverse.cpp" />
+    <ClCompile Include="reversetest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
