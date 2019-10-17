@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ninetynine.cpp" />
+    <ClCompile Include="ninetyninetest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ninetynine.h" />

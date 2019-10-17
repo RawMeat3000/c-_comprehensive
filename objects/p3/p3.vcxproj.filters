@@ -18,6 +18,9 @@
     <ClCompile Include="ninetynine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ninetyninetest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ninetynine.h">
