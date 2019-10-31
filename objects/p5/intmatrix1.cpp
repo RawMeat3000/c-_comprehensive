@@ -1,18 +1,31 @@
 #include "..\util\util.h"
 #include "intmatrix1.h"
 
-void intmatrix1::init(const int num_rows, const int num_columns, const int primer)
+void intmatrix1::init(int num_rows, int num_columns, int primer)
 {
-    matrix = new int*[num_rows];
-	for ( int i = 0; i < num_rows; i++ )
+	rows = num_rows;
+	columns = num_columns;
+
+	if ( rows == 0 || columns == 0 )
 	{
-		*matrix = new int[num_columns];
-		for ( int j = 0; j < num_columns; j++ )
+		matrix = new int* [0];
+	}
+	else
+	{
+		matrix = new int* [rows];
+		for ( int i = 0; i < rows; ++i )
 		{
-			matrix[i][j] = primer;
+			matrix[i] = new int [columns];
+			for ( int j = 0; j < columns; ++j )
+			{
+				matrix[i][j] = primer;
+			}
 		}
 	}
-	return;
+}
+void intmatrix1::init(string matrix)
+{
+
 }
 void intmatrix1::print(string message)
 {
@@ -20,22 +33,75 @@ void intmatrix1::print(string message)
 }
 void intmatrix1::fini()
 {
-
+	for ( int i = 0; i < rows; ++i )
+	{
+		delete[] matrix[i];
+	}
+	delete[] matrix;
 }
-void intmatrix1::add(int* matrix1, int* matrix2)
+intmatrix1 intmatrix1::add(intmatrix1 m)
 {
-
+	intmatrix1 result = m;
+	for ( int i = 0; i < rows; ++i )
+	{
+		for ( int j = 0; j < columns; ++j )
+		{
+		}
+	}
+	return result;
 }
-void intmatrix1::mult(int* matrix1, int* matrix2)
+intmatrix1 intmatrix1::mult(intmatrix1 m)
 {
+	intmatrix1 result = m;
+	for ( int i = 0; i < rows; ++i )
+	{
+		for ( int j = 0; j < columns; ++j )
+		{
 
+		}
+	}
+	return result;
 }
-void intmatrix1::isEqual(int* matrix1, int* matrix2)
+bool intmatrix1::isEqual(intmatrix1 m)
 {
-
+	bool is_equal = true;
+	for ( int i = 0; i < rows; ++i )
+	{
+		for ( int j = 0; j < columns; ++j )
+		{
+			if ( m.matrix[i][j] != matrix[i][j] )
+			{
+				is_equal = false;
+			}
+		}
+	}
+	return is_equal;
 }
 
-bool intmatrix1::size_equal(int* matrix1, int* matrix2)
+bool intmatrix1::isEmpty()
 {
+	bool is_empty = true;
+	for ( int i = 0; i < rows; ++i )
+	{
+		for ( int j = 0; j < columns; ++j )
+		{
+			if ( matrix[i][j] != 0 )
+			{
+				is_empty = false;
+			}
+		}
+	}
+	return is_empty;
+}
 
+bool intmatrix1::size_equal(intmatrix1 m)
+{
+	bool is_equal = false;
+	for ( int i = 0; i < rows; ++i )
+	{
+		for ( int j = 0; j < columns; ++j )
+		{
+		}
+	}
+	return is_equal;
 }

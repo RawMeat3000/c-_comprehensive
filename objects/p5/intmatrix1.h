@@ -4,13 +4,17 @@
 class intmatrix1
 {
 public:
-	void init(const int num_rows=0, const int num_columns=0, const int primer=0);
+	void init(int num_rows=0, int num_columns=0, int primer=0);
+	void init(string matrix);
 	void print(string message);
 	void fini();
-	void add(int* matrix1, int* matrix2);
-	void mult(int* matrix1, int* matrix2);
-	void isEqual(int* matrix1, int* matrix2);
+	intmatrix1 add(intmatrix1 m);
+	intmatrix1 mult(intmatrix1 m);
+	bool isEqual(intmatrix1 m);
+	bool isEmpty();
 private:
 	int** matrix;
-	bool size_equal(int* matrix1, int* matrix2);
+	int rows;
+	int columns;
+	bool size_equal(intmatrix1 m);
 };
