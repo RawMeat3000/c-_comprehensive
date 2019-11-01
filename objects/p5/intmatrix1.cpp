@@ -222,11 +222,19 @@ intmatrix1 intmatrix1::mult(intmatrix1 m)
 	if ( size_equal(m) && !isEmpty() && !m.isEmpty() )
 	{
 		result.init(rows, columns);
+
+		int row_product = 0;
+		int column_product = 0;
+		int third = 0;
 		for ( int i = 0; i < rows; ++i )
 		{
 			for ( int j = 0; j < columns; ++j )
 			{
-				result.matrix[i][j] = matrix[i][j] * m.matrix[i][j];
+				for ( int k = 0; k < columns; ++k )
+				{
+					//cout << i << j << k << endl;
+					result.matrix[i][j] += matrix[i][k] * m.matrix[k][j];
+				}
 			}
 		}
 	}
