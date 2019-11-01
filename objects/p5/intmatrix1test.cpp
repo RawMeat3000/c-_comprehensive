@@ -45,7 +45,7 @@ void test_init_fini() {
 
   intmatrix1 f ;
   f.init("1 2|3 4|5 6") ;
-  f.print("Matrix e") ;
+  f.print("Matrix f") ;
 
   intmatrix1 g ;
   g.init(" 1 2 |3 4 |5 6  ") ;

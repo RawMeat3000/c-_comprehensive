@@ -14,7 +14,8 @@ public:
 	bool isEmpty();
 private:
 	int** matrix;
-	int rows;
-	int columns;
+	int rows = 0;
+	int columns = 0;
 	bool size_equal(intmatrix1 m);
+	void set_rows_and_columns_from_string(string matrix);
 };
