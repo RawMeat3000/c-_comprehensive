@@ -1,21 +1,21 @@
 #pragma once
 
 
-class intmatrix2
+class intmatrix1
 {
 public:
-	void init(int num__rows=0, int num__columns=0, int primer=0);
+	void init(int num_rows=0, int num_columns=0, int primer=0);
 	void init(string matrix);
 	void print(string message);
 	void fini();
-	intmatrix2 add(intmatrix2 m);
-	intmatrix2 mult(intmatrix2 m);
-	bool isEqual(intmatrix2 m);
+	intmatrix1 add(intmatrix1 m);
+	intmatrix1 mult(intmatrix1 m);
+	bool isEqual(intmatrix1 m);
 	bool isEmpty();
 private:
-	int** matrix;
+	int** _matrix;
 	int _rows = 0;
-	int __columns = 0;
-	bool size_equal(intmatrix2 m);
-	void set__rows_and__columns_from_string(string matrix);
+	int _columns = 0;
+	bool size_equal(intmatrix1 m);
+	void set_rows_and_columns_from_string(string matrix);
 };
