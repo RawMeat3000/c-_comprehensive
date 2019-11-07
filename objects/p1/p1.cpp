@@ -37,17 +37,17 @@ void p1::print_usa()
 						0,1,0,0,0,0,0,0,0,0,0,0,
 						0,0,0,0,0,0,0,0,0,0,0,0 };
 
-	int num_columns = 12;
-	int num_rows = (sizeof( usa_code ) / sizeof( int )) / num_columns;
+	int num__columns = 12;
+	int num__rows = (sizeof( usa_code ) / sizeof( int )) / num__columns;
 	int usa_index = 0;
 	int usa_a_ok = 0;
 
 	int first = 1;
-	for ( int i = first; i < num_columns + first; i++ )
+	for ( int i = first; i < num__columns + first; i++ )
 	{
-		for ( int j = first; j < num_rows + first; j++ )
+		for ( int j = first; j < num__rows + first; j++ )
 		{
-			usa_index = num_columns * j - i;
+			usa_index = num__columns * j - i;
 			usa_a_ok = usa_code[usa_index];
 
 			if ( usa_a_ok )

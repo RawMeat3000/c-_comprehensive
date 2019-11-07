@@ -1,12 +1,12 @@
 #include "..\util\util.h"
 #include "intmatrix2.h"
 
-void intmatrix2::init(int num__rows, int num__columns, int primer)
+intmatrix2::intmatrix2(int num_rows, int num_columns, int primer)
 {
-	_rows = num__rows;
-	_columns = num__columns;
+	_rows = num_rows;
+	_columns = num_columns;
 
-	if ( _rows == 0 || __columns == 0 )
+	if ( _rows == 0 || _columns == 0 )
 	{
 		_rows = 0;
 		_columns = 0;
@@ -17,26 +17,26 @@ void intmatrix2::init(int num__rows, int num__columns, int primer)
 		_matrix = new int* [_rows];
 		for ( int i = 0; i < _rows; ++i )
 		{
-			matrix[i] = new int [_columns];
+			_matrix[i] = new int [_columns];
 			for ( int j = 0; j < _columns; ++j )
 			{
-				matrix[i][j] = primer;
+				_matrix[i][j] = primer;
 			}
 		}
 	}
 }
 
-void intmatrix2::init(string matrix_str)
+intmatrix2::intmatrix2(const string matrix_str)
 {
 	bool is_number_prev = false; // track if the last char was a number
 	int number = 0;
 	int to_int = 48;
 	int str_len = matrix_str.length();
 	bool break_out = false;
-	set__rows_and__columns_from_string(matrix_str);
+	_set_rows_and_columns_from_string(matrix_str);
 
 	// initialize array
-	if ( _rows == 0 || __columns == 0 )
+	if ( _rows == 0 || _columns == 0 )
 	{
 		_matrix = new int* [0];
 		return;
@@ -46,10 +46,10 @@ void intmatrix2::init(string matrix_str)
 		_matrix = new int*[_rows];
 		for ( int j = 0; j < _rows; j++ )
 		{
-			matrix[j] = new int[_columns];
+			_matrix[j] = new int[_columns];
 			for ( int k = 0; k < _columns; k++ )
 			{
-				matrix[j][k] = -1;
+				_matrix[j][k] = -1;
 			}
 		}
 	}
@@ -78,19 +78,19 @@ void intmatrix2::init(string matrix_str)
 		}
 		if ( ch != '|' && ch != ' ' )
 		{
-			if ( matrix[r][c] == -1 || is_number_prev )
+			if ( _matrix[r][c] == -1 || is_number_prev )
 			{
 				if ( is_number_prev )
 				{
 					number *= 10;
 					number += ch - to_int;
-					matrix[r][c] = number;
+					_matrix[r][c] = number;
 					break_out = true;
 				}
 				else
 				{
 					number = ch - to_int;
-					matrix[r][c] = number;
+					_matrix[r][c] = number;
 					is_number_prev = true;
 					break_out = true;
 				}
@@ -99,10 +99,10 @@ void intmatrix2::init(string matrix_str)
 	}
 }
 
-void intmatrix2::set__rows_and__columns_from_string(string matrix)
+void intmatrix2::_set_rows_and_columns_from_string(const string matrix)
 {
 	bool is_number_prev = false; // track if the last char was a number
-	int prev__columns = 0;
+	int prev_columns = 0;
 	int m_len = matrix.length();
 	_rows = 1;
 
@@ -123,10 +123,10 @@ void intmatrix2::set__rows_and__columns_from_string(string matrix)
 				_columns += 1;
 			is_number_prev = false;
 
-			if ( __columns != prev__columns )
+			if ( _columns != prev_columns )
 			{
-				if ( prev__columns == 0 )
-					prev__columns = _columns;
+				if ( prev_columns == 0 )
+					prev_columns = _columns;
 				else
 				{
 					// mismatched column sizes, bad data
@@ -154,7 +154,7 @@ void intmatrix2::set__rows_and__columns_from_string(string matrix)
 
 		if ( i == m_len - 1)
 		{
-			if ( __columns != prev__columns )
+			if ( _columns != prev_columns )
 			{
 				_columns = 0;
 				_rows = 0;
@@ -164,64 +164,61 @@ void intmatrix2::set__rows_and__columns_from_string(string matrix)
 	}
 }
 
-void intmatrix2::print(string message)
+ostream& operator<<(ostream &output, const intmatrix2 &m)
 {
-	cout << message << endl;
-	if ( _rows == 0 )
+	if ( m._rows == 0 )
 	{
-		cout << "Empty Matrix" << endl << endl;
-		return;
+		output << "Empty Matrix" << endl << endl;
+		return output;
 	}
-	for ( int i = 0; i < _rows; i++ )
+	for ( int i = 0; i < m._rows; i++ )
 	{
-		for ( int j = 0; j < _columns; j++ )
+		for ( int j = 0; j < m._columns; j++ )
 		{
-			cout << matrix[i][j] << ' ';
+			output << m._matrix[i][j] << ' ';
 		}
-		cout << endl;
+		output << endl;
 	}
-	cout << endl;
+	output << endl;
+
+	return output;
 }
 
-void intmatrix2::fini()
+intmatrix2::~intmatrix2()
 {
 	for ( int i = 0; i < _rows; i++ )
 	{
-		delete[] matrix[i];
+		delete[] _matrix[i];
 	}
-	delete[] matrix;
+	delete[] _matrix;
 }
 
-intmatrix2 intmatrix2::add(intmatrix2 m)
+intmatrix2& intmatrix2::operator+(intmatrix2 &m)
 {
-	intmatrix2 result;
-
-	if ( size_equal(m) && !isEmpty() && !m.isEmpty() )
+	if ( _size_equal(m) && !isEmpty() && !m.isEmpty() )
 	{
-		result.init(_rows, _columns);
+		intmatrix2 result(_rows, _columns);
 		for ( int i = 0; i < _rows; ++i )
 		{
 			for ( int j = 0; j < _columns; ++j )
 			{
-				result.matrix[i][j] = matrix[i][j] + m.matrix[i][j];
+				result._matrix[i][j] = _matrix[i][j] + m._matrix[i][j];
 			}
 		}
+		return result;
 	}
 	else
 	{
-		result.init();
+		intmatrix2 result(0,0,0);
+		return result;
 	}
-
-	return result;
 }
 
-intmatrix2 intmatrix2::mult(intmatrix2 m)
+intmatrix2& intmatrix2::mult(intmatrix2 &m)
 {
-	intmatrix2 result;
-
-	if ( size_equal(m) && !isEmpty() && !m.isEmpty() )
+	if ( _size_equal(m) && !isEmpty() && !m.isEmpty() )
 	{
-		result.init(_rows, _columns);
+		intmatrix2 result(_rows, _columns);
 
 		int row_product = 0;
 		int column_product = 0;
@@ -233,20 +230,24 @@ intmatrix2 intmatrix2::mult(intmatrix2 m)
 				for ( int k = 0; k < _columns; ++k )
 				{
 					//cout << i << j << k << endl;
-					result.matrix[i][j] += matrix[i][k] * m.matrix[k][j];
+					result._matrix[i][j] += _matrix[i][k] * m._matrix[k][j];
 				}
 			}
 		}
 	}
 	else
 	{
-		result.init();
+		intmatrix2 result(0, 0, 0);
+		return result;
 	}
-
-	return result;
 }
 
-bool intmatrix2::isEqual(intmatrix2 m)
+intmatrix2& intmatrix2::operator*(intmatrix2 &m)
+{
+	return mult(m)
+}
+
+bool intmatrix2::isEqual(intmatrix2 &m)
 {
 	bool is_equal = true;
 	for ( int i = 0; i < _rows; ++i )
@@ -258,7 +259,7 @@ bool intmatrix2::isEqual(intmatrix2 m)
 				is_equal = false;
 				continue;
 			}
-			if ( m.matrix[i][j] != matrix[i][j] )
+			if ( m._matrix[i][j] != _matrix[i][j] )
 				is_equal = false;
 		}
 	}
@@ -272,7 +273,7 @@ bool intmatrix2::isEmpty()
 	{
 		for ( int j = 0; j < _columns; ++j )
 		{
-			if ( matrix[i][j] != 0 )
+			if ( _matrix[i][j] != 0 )
 			{
 				is_empty = false;
 			}
@@ -281,10 +282,10 @@ bool intmatrix2::isEmpty()
 	return is_empty;
 }
 
-bool intmatrix2::size_equal(intmatrix2 m)
+bool intmatrix2::_size_equal(const intmatrix2 &m)
 {
 	bool is_equal = false;
-	if ( m._rows == _rows && m._columns == __columns )
+	if ( m._rows == _rows && m._columns == _columns )
 		is_equal = true;
 	return is_equal;
 }
