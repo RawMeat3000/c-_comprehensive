@@ -1,61 +1,61 @@
 /*----------------------------------------------------------------
 Copyright (c) 2013 Author: Jagadeesh Vasudevamurthy
-file: intmatrix2test.cpp
+file: intmatrix1test.cpp
 
 On linux:
-g++ intmatrix2.cpp intmatrix2test.cpp
+g++ intmatrix1.cpp intmatrix1test.cpp
 valgrind a.out
 
 -----------------------------------------------------------------*/
 
 /*----------------------------------------------------------------
-This file test intmatrix2 object 
+This file test intmatrix1 object 
 -----------------------------------------------------------------*/
 
 /*----------------------------------------------------------------
 All includes here
 -----------------------------------------------------------------*/
 #include "..\util\util.h"
-#include "intmatrix2.h"
+#include "intmatrix1.h"
 
 /*----------------------------------------------------------------
 test init and fini
 -----------------------------------------------------------------*/
 void test_init_fini() {
-  intmatrix2 a ;
+  intmatrix1 a ;
   a.init() ;
-  a.print("_matrix a") ;
+  a.print("Matrix a") ;
 
-  intmatrix2 b ;
+  intmatrix1 b ;
   b.init(3,4) ;
-  b.print("_matrix b") ;
+  b.print("Matrix b") ;
 
-  intmatrix2 c ;
+  intmatrix1 c ;
   c.init(2,0,7) ;
-  c.print("_matrix c") ;
+  c.print("Matrix c") ;
 
-  intmatrix2 d ;
+  intmatrix1 d ;
   d.init(0,10,7) ;
-  d.print("_matrix d") ;
+  d.print("Matrix d") ;
 
-  intmatrix2 e ;
+  intmatrix1 e ;
   e.init(3,10,7) ;
-  e.print("_matrix e") ;
+  e.print("Matrix e") ;
 
 
-  intmatrix2 f ;
+  intmatrix1 f ;
   f.init("1 2|3 4|5 6") ;
-  f.print("_matrix f") ;
+  f.print("Matrix f") ;
 
-  intmatrix2 g ;
+  intmatrix1 g ;
   g.init(" 1 2 |3 4 |5 6  ") ;
-  g.print("_matrix g") ;
+  g.print("Matrix g") ;
   assert(f.isEqual(g)) ;
   assert(g.isEqual(f)) ;
 
-  intmatrix2 h ;
+  intmatrix1 h ;
   h.init(" 1 2 |3 4 |5 6 8 ") ;
-  h.print("_matrix h") ;
+  h.print("Matrix h") ;
   assert(h.isEmpty()) ;
   assert(!f.isEqual(h)) ;
 
@@ -72,17 +72,17 @@ void test_init_fini() {
 test add1
 -----------------------------------------------------------------*/
 void test_add1(const char* as, const char* bs, const char* anss) {
-  intmatrix2 a ;
+  intmatrix1 a ;
   a.init(as) ;
-  a.print("_matrix a") ;
-  intmatrix2 b ;
+  a.print("Matrix a") ;
+  intmatrix1 b ;
   b.init(bs) ;
-  b.print("_matrix b") ;
-  intmatrix2 s = a.add(b) ;
-  s.print("_matrix s") ;
-  intmatrix2 ans;
+  b.print("Matrix b") ;
+  intmatrix1 s = a.add(b) ;
+  s.print("matrix s") ;
+  intmatrix1 ans;
   ans.init(anss) ;
-  ans.print("_matrix expected ans") ;
+  ans.print("matrix expected ans") ;
   assert(s.isEqual(ans)) ;
   assert(ans.isEqual(s)) ;
   a.fini() ;
@@ -103,17 +103,17 @@ void test_add() {
 test mult1
 -----------------------------------------------------------------*/
 void test_mult1(const char* as, const char* bs, const char* anss) {
-  intmatrix2 a ;
+  intmatrix1 a ;
   a.init(as) ;
-  a.print("_matrix a") ;
-  intmatrix2 b ;
+  a.print("Matrix a") ;
+  intmatrix1 b ;
   b.init(bs) ;
-  b.print("_matrix b") ;
-  intmatrix2 s = a.mult(b) ;
-  s.print("_matrix s") ;
-  intmatrix2 ans;
+  b.print("Matrix b") ;
+  intmatrix1 s = a.mult(b) ;
+  s.print("matrix s") ;
+  intmatrix1 ans;
   ans.init(anss) ;
-  ans.print("_matrix expected ans") ;
+  ans.print("matrix expected ans") ;
   assert(s.isEqual(ans)) ;
   assert(ans.isEqual(s)) ;
   a.fini() ;
