@@ -26,6 +26,11 @@ intmatrix2::intmatrix2(int num_rows, int num_columns, int primer)
 	}
 }
 
+intmatrix2::intmatrix2(int num_rows, int num_columns)
+{
+	intmatrix2(num_rows, num_columns, 0);
+}
+
 intmatrix2::intmatrix2(const string matrix_str)
 {
 	bool is_number_prev = false; // track if the last char was a number
@@ -99,6 +104,62 @@ intmatrix2::intmatrix2(const string matrix_str)
 	}
 }
 
+void intmatrix2::_copy(const intmatrix2& imtrx)
+{
+	_rows = imtrx._rows;
+	_columns = imtrx._columns;
+	_matrix = new int*[_rows];
+	// initialize array
+	if ( _rows == 0 || _columns == 0 )
+	{
+		_matrix = new int*[0];
+	}
+	else
+	{
+		for ( int i = 0; i < _rows; ++i )
+		{
+			_matrix[i] = new int[_columns];
+			for ( int j = 0; j < _columns; ++j )
+			{
+				_matrix[i][j] = imtrx._matrix[i][j];
+			}
+		}
+	}
+}
+
+intmatrix2::intmatrix2() : _rows(0), _columns(0), _matrix(new int*[_rows])
+{
+}
+
+intmatrix2::intmatrix2(const intmatrix2& imtrx)
+{
+	_copy(imtrx);
+}
+
+intmatrix2& intmatrix2::operator=(intmatrix2& m)
+{
+	if ( this != &m ) 
+	{
+		_release();
+		_copy(m);
+	}
+	return *this;
+}
+
+void intmatrix2::_release()
+{
+	for ( int i = 0; i < _rows; i++ )
+	{
+		delete[] _matrix[i];
+	}
+	delete[] _matrix;
+}
+
+intmatrix2::~intmatrix2()
+{
+	_release();
+}
+
 void intmatrix2::_set_rows_and_columns_from_string(const string matrix)
 {
 	bool is_number_prev = false; // track if the last char was a number
@@ -164,6 +225,62 @@ void intmatrix2::_set_rows_and_columns_from_string(const string matrix)
 	}
 }
 
+intmatrix2& intmatrix2::add(intmatrix2 &m)
+{
+	if ( _size_equal(m) && !isEmpty() && !m.isEmpty() )
+	{
+		intmatrix2 result(_rows, _columns);
+		for ( int i = 0; i < _rows; ++i )
+		{
+			for ( int j = 0; j < _columns; ++j )
+			{
+				result._matrix[i][j] = _matrix[i][j] + m._matrix[i][j];
+			}
+		}
+		return result;
+	}
+	else
+	{
+		intmatrix2 result(0, 0, 0);
+		return result;
+	}
+}
+
+intmatrix2& intmatrix2::operator+(intmatrix2 &m)
+{
+	return add(m);
+}
+
+intmatrix2& intmatrix2::mult(intmatrix2 &m)
+{
+	if ( _size_equal(m) && !isEmpty() && !m.isEmpty() )
+	{
+		intmatrix2 result(_rows, _columns);
+
+		for ( int i = 0; i < _rows; ++i )
+		{
+			for ( int j = 0; j < _columns; ++j )
+			{
+				for ( int k = 0; k < _columns; ++k )
+				{
+					result._matrix[i][j] += _matrix[i][k] * m._matrix[k][j];
+				}
+			}
+		}
+		return result;
+	}
+	else
+	{
+		intmatrix2 result(0, 0, 0);
+		return result;
+	}
+}
+
+intmatrix2& intmatrix2::operator*(intmatrix2 &m)
+{
+	return mult(m);
+}
+
 ostream& operator<<(ostream &output, const intmatrix2 &m)
 {
 	if ( m._rows == 0 )
@@ -182,69 +299,6 @@ ostream& operator<<(ostream &output, const intmatrix2 &m)
 	output << endl;
 
 	return output;
-}
-
-intmatrix2::~intmatrix2()
-{
-	for ( int i = 0; i < _rows; i++ )
-	{
-		delete[] _matrix[i];
-	}
-	delete[] _matrix;
-}
-
-intmatrix2& intmatrix2::operator+(intmatrix2 &m)
-{
-	if ( _size_equal(m) && !isEmpty() && !m.isEmpty() )
-	{
-		intmatrix2 result(_rows, _columns);
-		for ( int i = 0; i < _rows; ++i )
-		{
-			for ( int j = 0; j < _columns; ++j )
-			{
-				result._matrix[i][j] = _matrix[i][j] + m._matrix[i][j];
-			}
-		}
-		return result;
-	}
-	else
-	{
-		intmatrix2 result(0,0,0);
-		return result;
-	}
-}
-
-intmatrix2& intmatrix2::mult(intmatrix2 &m)
-{
-	if ( _size_equal(m) && !isEmpty() && !m.isEmpty() )
-	{
-		intmatrix2 result(_rows, _columns);
-
-		int row_product = 0;
-		int column_product = 0;
-		int third = 0;
-		for ( int i = 0; i < _rows; ++i )
-		{
-			for ( int j = 0; j < _columns; ++j )
-			{
-				for ( int k = 0; k < _columns; ++k )
-				{
-					//cout << i << j << k << endl;
-					result._matrix[i][j] += _matrix[i][k] * m._matrix[k][j];
-				}
-			}
-		}
-	}
-	else
-	{
-		intmatrix2 result(0, 0, 0);
-		return result;
-	}
-}
-
-intmatrix2& intmatrix2::operator*(intmatrix2 &m)
-{
-	return mult(m)
 }
 
 bool intmatrix2::isEqual(intmatrix2 &m)
