@@ -13,12 +13,13 @@ employee::employee(string fn, string ln, string ssn) : _first_name(fn), _last_na
 
 void employee::_copy(const employee& e)
 {
-
+	_first_name = e._first_name;
+	_last_name = e._last_name;
+	_ssn = e._ssn;
 }
 
 employee::employee(const employee& e) : _first_name(e._first_name), _last_name(e._last_name), _ssn(e._ssn)
 {
-
 	if ( is_output_displayed )
 	{
 		cout << "employee copy constructor" << endl;
@@ -36,14 +37,9 @@ employee& employee::operator=(const employee& e)
 	return *this;
 }
 
-bool employee::operator!=(employee& e)
-{
-	//TODO
-	return false;
-}
-
 void employee::_release()
 {
+	// nothing to release...
 }
 
 employee::~employee()

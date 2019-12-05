@@ -19,7 +19,6 @@ public:
 	{
 		if ( &se != this ) 
 		{
-			cout << "salariedemployee = operator " << se._company_name << endl;
 			employee::operator=(se);
 			_company_name = se._company_name;
 			_salary = se._salary;

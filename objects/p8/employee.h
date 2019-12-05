@@ -11,7 +11,6 @@ public:
 	virtual ~employee();
 
 	employee& operator=(const employee& e);
-	bool operator!=(employee& e);
 	friend ostream& operator<<(ostream &output, const employee &e);
 
 	static bool display();
