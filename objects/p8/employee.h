@@ -1,0 +1,30 @@
+#pragma once
+#include "..\util\util.h"
+
+class employee
+{
+public:
+	employee(string fn, string ln, string ssn);
+
+	employee(const employee& e);
+
+	virtual ~employee();
+
+	employee& operator=(const employee& e);
+	bool operator!=(employee& e);
+	friend ostream& operator<<(ostream &output, const employee &e);
+
+	static bool display();
+	static void setShow(bool flag);
+
+private:
+	void _release();
+	void _copy(const employee& e);
+
+	string _first_name;
+	string _last_name;
+	string _ssn;
+
+	static bool is_output_displayed;
+
+};
