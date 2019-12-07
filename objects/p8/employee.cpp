@@ -3,8 +3,12 @@
 
 bool employee::is_output_displayed = true;
 
-employee::employee(string fn, string ln, string ssn) : _first_name(fn), _last_name(ln), _ssn(ssn)
+employee::employee(const string& fn, const string& ln, const string& ssn) : _first_name(fn), _last_name(ln), _ssn(ssn)
 {
+	_first_name = fn;
+	_last_name = ln;
+	_ssn = ssn;
+
 	if ( is_output_displayed )
 	{
 		cout << "employee constructor" << endl;
@@ -53,6 +57,9 @@ employee::~employee()
 
 ostream& operator<<(ostream &output, const employee &e)
 {
+	output << "First name: " << e._first_name << endl;
+	output << "Last name: " << e._last_name << endl;
+	output << "SSN: " << e._ssn << endl;
 	return output;
 }
 

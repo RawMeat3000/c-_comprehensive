@@ -4,7 +4,7 @@
 class employee
 {
 public:
-	employee(string fn, string ln, string ssn);
+	employee(const string& fn, const string& ln, const string& ssn);
 
 	employee(const employee& e);
 
@@ -24,6 +24,7 @@ private:
 	string _last_name;
 	string _ssn;
 
+protected:
 	static bool is_output_displayed;
 
 };
